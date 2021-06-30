@@ -1,7 +1,6 @@
 package com.musashisan.delaunay.triangulation;
 
 import processing.core.PApplet;
-import processing.core.PVector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,8 @@ import java.util.List;
 public class Application extends PApplet {
 
     int numberOfPoints = 12;
-    List<PVector> points = new ArrayList<>();
+    Triangulation triangulation = new Triangulation();
+    Mesh mesh;
 
     public static void main(String[] args) {
         PApplet.main("com.musashisan.delaunay.triangulation.Application");
@@ -24,12 +24,14 @@ public class Application extends PApplet {
     public void setup() {
         background(0.0F);
         stroke(255);
-        this.initPoints();
+
+        List<Point> points = this.generateRandomPoints(numberOfPoints);
+        this.mesh = this.triangulation.calculate(points);
     }
 
     @Override
     public void draw() {
-        points.forEach(p -> point(p.x, p.y));
+        this.mesh.getPoints().forEach(p -> point(p.getX(), p.getY()));
     }
 
     @Override
@@ -39,10 +41,11 @@ public class Application extends PApplet {
         }
     }
 
-    private void initPoints() {
-        points.clear();
+    private List<Point> generateRandomPoints(int numberOfPoints) {
+        List<Point> points = new ArrayList<>();
         for (int i = 0; i < numberOfPoints; i++) {
-            points.add(new PVector(random(width), random(height)));
+            points.add(new Point(random(width), random(height)));
         }
+        return points;
     }
 }
