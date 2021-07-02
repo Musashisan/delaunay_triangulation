@@ -17,4 +17,13 @@ public class Point {
     public String toString() {
         return "Point{x=" + x + ", y=" + y + '}';
     }
+
+    // is a(self)->b->c a counter-clockwise turn?
+    // 1 if counter-clockwise, -1 if clockwise, 0 if collinear
+    public int isCounterClockWise(Point b, Point c) {
+        double twiceEnclosedArea = (b.getX() - this.x) * (c.getY() - this.y) - (c.getX() - this.x) * (b.getY() - this.y);
+        if (twiceEnclosedArea < 0) return -1;
+        else if (twiceEnclosedArea > 0) return 1;
+        else return 0;
+    }
 }

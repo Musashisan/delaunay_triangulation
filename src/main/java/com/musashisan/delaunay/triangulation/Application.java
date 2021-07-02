@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Application extends PApplet {
 
-    int numberOfPoints = 12;
+    int numberOfPoints = 9;
     Triangulation triangulation = new Triangulation();
     Mesh mesh;
 
@@ -31,6 +31,9 @@ public class Application extends PApplet {
 
     @Override
     public void draw() {
+        stroke(128);
+        this.mesh.getEdges().forEach(edge -> line(edge.getA().getX(), edge.getA().getY(), edge.getB().getX(), edge.getB().getY()));
+        stroke(255, 0, 0);
         this.mesh.getPoints().forEach(p -> point(p.getX(), p.getY()));
     }
 
