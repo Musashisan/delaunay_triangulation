@@ -32,7 +32,7 @@ public class Application extends PApplet {
     @Override
     public void draw() {
         stroke(128);
-        this.mesh.getEdges().forEach(edge -> line(edge.getA().getX(), edge.getA().getY(), edge.getB().getX(), edge.getB().getY()));
+        this.mesh.getEdges().forEach(edge -> line(edge.getOrigin().getX(), edge.getOrigin().getY(), edge.getDestination().getX(), edge.getDestination().getY()));
         stroke(255, 0, 0);
         this.mesh.getPoints().forEach(p -> point(p.getX(), p.getY()));
     }

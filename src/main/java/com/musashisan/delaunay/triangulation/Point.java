@@ -18,12 +18,17 @@ public class Point {
         return "Point{x=" + x + ", y=" + y + '}';
     }
 
-    // is a(self)->b->c a counter-clockwise turn?
-    // 1 if counter-clockwise, -1 if clockwise, 0 if collinear
-    public int isCounterClockWise(Point b, Point c) {
+    /**
+     * Calculate the orientation of the triangle a(self)->b->c.
+     *
+     * @param b The second point
+     * @param c The 3rd point
+     * @return The current orientation of sequence a->b->c
+     */
+    public Orientation getOrientation(Point b, Point c) {
         double twiceEnclosedArea = (b.getX() - this.x) * (c.getY() - this.y) - (c.getX() - this.x) * (b.getY() - this.y);
-        if (twiceEnclosedArea < 0) return -1;
-        else if (twiceEnclosedArea > 0) return 1;
-        else return 0;
+        if (twiceEnclosedArea < 0) return Orientation.CLOCKWISE;
+        else if (twiceEnclosedArea > 0) return Orientation.COUNTERCLOCKWISE;
+        else return Orientation.COLLINEAR;
     }
 }

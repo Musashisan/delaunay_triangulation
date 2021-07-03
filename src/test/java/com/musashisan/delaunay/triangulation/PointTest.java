@@ -7,38 +7,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PointTest
 {
     @Test
-    void pointsAreCollinear()
+    void points_are_collinear()
     {
         Point a = new Point(0, 0);
         Point b = new Point(1, 0);
         Point c = new Point(2, 0);
 
-        int counterClockWise = a.isCounterClockWise(b, c);
+        Orientation orientation = a.getOrientation(b, c);
 
-        assertThat(counterClockWise).isEqualTo(0);
+        assertThat(orientation).isEqualTo(Orientation.COLLINEAR);
     }
 
     @Test
-    void pointsAreClockWise()
+    void points_are_clockWise()
     {
         Point a = new Point(0, 0);
         Point b = new Point(1, 1);
         Point c = new Point(2, 0);
 
-        int clockWise = a.isCounterClockWise(b, c);
+        Orientation orientation = a.getOrientation(b, c);
 
-        assertThat(clockWise).isEqualTo(-1);
+        assertThat(orientation).isEqualTo(Orientation.CLOCKWISE);
     }
 
     @Test
-    void pointsAreCounterClockWise()
+    void points_are_counter_clockWise()
     {
         Point a = new Point(0, 0);
         Point b = new Point(2, 0);
         Point c = new Point(1, 1);
 
-        int counterClockWise = a.isCounterClockWise(b, c);
+        Orientation orientation = a.getOrientation(b, c);
 
-        assertThat(counterClockWise).isEqualTo(1);
+        assertThat(orientation).isEqualTo(Orientation.COUNTERCLOCKWISE);
     }
 }
